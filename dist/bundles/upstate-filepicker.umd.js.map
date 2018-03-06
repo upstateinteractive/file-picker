@@ -1,0 +1,17 @@
+{
+  "version": 3,
+  "file": "upstate-filepicker.umd.js",
+  "sources": [
+    "ng://@upstate/filepicker/out/src/file-picker/file-picker.component.ts"
+  ],
+  "sourcesContent": [
+    "import { Component, Input, AfterViewInit, ViewChild, ElementRef, forwardRef, OnInit } from '@angular/core';\nimport filestack from 'filestack-js';\nimport { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';\n\nexport const FILEPICKER_CONTROL_VALUE_ACCESSOR: any = {\n  provide: NG_VALUE_ACCESSOR,\n  useExisting: forwardRef(() => FilePickerComponent),\n  multi: true\n};\n\n@Component({\n  selector: 'obg-file-picker',\n  template: `<button class=\"upload\" mat-raised-button (click)=\"upload()\">Upload Files</button>`,\n  styles: [`.upload{\n  width:150px;\n  margin:20px 0;\n}`],\n  providers: [FILEPICKER_CONTROL_VALUE_ACCESSOR]\n})\nexport class FilePickerComponent implements ControlValueAccessor, OnInit {\n  @Input() options;\n  @Input() apikey;\n  private client;\n  onChange: (value: any) => void = () => {};\n  onTouched = () => {};\n\n  constructor() { }\n\n  upload() {\n    this.client.pick(this.options)\n    .then(data => {\n      this.onChange(data.filesUploaded);\n    });\n  }\n\n  writeValue(control) {\n  }\n\n  registerOnChange(fn: (value: any) => void) {\n    this.onChange = fn;\n  }\n\n  registerOnTouched(fn: () => void) {\n    this.onTouched = fn;\n  }\n\n  ngOnInit() {\n    this.client = filestack.init(this.apikey);\n  }\n\n}\n"
+  ],
+  "names": [
+    "Input",
+    "Component",
+    "forwardRef",
+    "NG_VALUE_ACCESSOR"
+  ],
+  "mappings": ";;;;;;;;AAAA,IAIa,iCAAiC,GAAQ;IACpD,OAAO,EAAEG,uBAAiB;IAC1B,WAAW,EAAED,eAAU,CAAC,YAA1B,EAAgC,OAAA,mBAAmB,CAAnD,EAAmD,CAAC;IAClD,KAAK,EAAE,IAAI;CACZ,CAAC;AAWF,IAAA,mBAAA,kBAAA,YAAA;IAOE,SAAF,mBAAA,GAAA;QAHA,IAAA,CAAA,QAAA,GAAmC,YAAnC,GAA2C,CAA3C;QACA,IAAA,CAAA,SAAA,GAAc,YAAd,GAAsB,CAAtB;KAEmB;IAEjB,mBAAF,CAAA,SAAA,CAAA,MAAQ,GAAN,YAAF;QAAE,IAAF,KAAA,GAAA,IAAA,CAKG;QAJC,IAAI,CAAC,MAAM,CAAC,IAAI,CAAC,IAAI,CAAC,OAAO,CAAC;aAC7B,IAAI,CAAC,UAAA,IAAI,EAAd;YACM,KAAI,CAAC,QAAQ,CAAC,IAAI,CAAC,aAAa,CAAC,CAAC;SACnC,CAAC,CAAC;KACJ,CAAH;IAEE,mBAAF,CAAA,SAAA,CAAA,UAAY,GAAV,UAAW,OAAO,EAApB;KACG,CAAH;IAEE,mBAAF,CAAA,SAAA,CAAA,gBAAkB,GAAhB,UAAiB,EAAwB,EAA3C;QACI,IAAI,CAAC,QAAQ,GAAG,EAAE,CAAC;KACpB,CAAH;IAEE,mBAAF,CAAA,SAAA,CAAA,iBAAmB,GAAjB,UAAkB,EAAc,EAAlC;QACI,IAAI,CAAC,SAAS,GAAG,EAAE,CAAC;KACrB,CAAH;IAEE,mBAAF,CAAA,SAAA,CAAA,QAAU,GAAR,YAAF;QACI,IAAI,CAAC,MAAM,GAAG,SAAS,CAAC,IAAI,CAAC,IAAI,CAAC,MAAM,CAAC,CAAC;KAC3C,CAAH;;;;IAtCA,EAAA,IAAA,EAACD,cAAS,EAAV,IAAA,EAAA,CAAW;gBACT,QAAQ,EAAE,iBAAiB;gBAC3B,QAAQ,EAAE,uFAAmF;gBAC7F,MAAM,EAAE,CAAC,+CAGT,CAAC;gBACD,SAAS,EAAE,CAAC,iCAAiC,CAAC;aAC/C,EAAD,EAAA;;;;IAEA,SAAA,EAAA,CAAA,EAAA,IAAA,EAAGD,UAAK,EAAR,EAAA;IACA,QAAA,EAAA,CAAA,EAAA,IAAA,EAAGA,UAAK,EAAR,EAAA;;;;;;;;;;;;;;"
+}

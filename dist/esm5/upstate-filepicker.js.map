@@ -1,0 +1,12 @@
+{
+  "version": 3,
+  "file": "upstate-filepicker.js",
+  "sources": [
+    "ng://@upstate/filepicker/out/src/file-picker/file-picker.component.ts"
+  ],
+  "sourcesContent": [
+    "import { Component, Input, AfterViewInit, ViewChild, ElementRef, forwardRef, OnInit } from '@angular/core';\nimport filestack from 'filestack-js';\nimport { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';\n\nexport const FILEPICKER_CONTROL_VALUE_ACCESSOR: any = {\n  provide: NG_VALUE_ACCESSOR,\n  useExisting: forwardRef(() => FilePickerComponent),\n  multi: true\n};\n\n@Component({\n  selector: 'obg-file-picker',\n  template: `<button class=\"upload\" mat-raised-button (click)=\"upload()\">Upload Files</button>`,\n  styles: [`.upload{\n  width:150px;\n  margin:20px 0;\n}`],\n  providers: [FILEPICKER_CONTROL_VALUE_ACCESSOR]\n})\nexport class FilePickerComponent implements ControlValueAccessor, OnInit {\n  @Input() options;\n  @Input() apikey;\n  private client;\n  onChange: (value: any) => void = () => {};\n  onTouched = () => {};\n\n  constructor() { }\n\n  upload() {\n    this.client.pick(this.options)\n    .then(data => {\n      this.onChange(data.filesUploaded);\n    });\n  }\n\n  writeValue(control) {\n  }\n\n  registerOnChange(fn: (value: any) => void) {\n    this.onChange = fn;\n  }\n\n  registerOnTouched(fn: () => void) {\n    this.onTouched = fn;\n  }\n\n  ngOnInit() {\n    this.client = filestack.init(this.apikey);\n  }\n\n}\n"
+  ],
+  "names": [],
+  "mappings": ";;;;AAAA,IAIa,iCAAiC,GAAQ;IACpD,OAAO,EAAE,iBAAiB;IAC1B,WAAW,EAAE,UAAU,CAAC,cAAM,OAAA,mBAAmB,GAAA,CAAC;IAClD,KAAK,EAAE,IAAI;CACZ,CAAC;AAWF;IAOE;QAHF,IAAA,CAAA,QAAA,GAAmC,eAAQ,CAA3C;QACA,IAAA,CAAA,SAAA,GAAc,eAAQ,CAAtB;KAEmB;IAEjB,oCAAM,GAAN;QAAA,iBAKC;QAJC,IAAI,CAAC,MAAM,CAAC,IAAI,CAAC,IAAI,CAAC,OAAO,CAAC;aAC7B,IAAI,CAAC,UAAA,IAAI;YACR,KAAI,CAAC,QAAQ,CAAC,IAAI,CAAC,aAAa,CAAC,CAAC;SACnC,CAAC,CAAC;KACJ;IAED,wCAAU,GAAV,UAAW,OAAO;KACjB;IAED,8CAAgB,GAAhB,UAAiB,EAAwB;QACvC,IAAI,CAAC,QAAQ,GAAG,EAAE,CAAC;KACpB;IAED,+CAAiB,GAAjB,UAAkB,EAAc;QAC9B,IAAI,CAAC,SAAS,GAAG,EAAE,CAAC;KACrB;IAED,sCAAQ,GAAR;QACE,IAAI,CAAC,MAAM,GAAG,SAAS,CAAC,IAAI,CAAC,IAAI,CAAC,MAAM,CAAC,CAAC;KAC3C;;;;IAtCH,EAAA,IAAA,EAAC,SAAS,EAAV,IAAA,EAAA,CAAW;gBACT,QAAQ,EAAE,iBAAiB;gBAC3B,QAAQ,EAAE,uFAAmF;gBAC7F,MAAM,EAAE,CAAC,+CAGT,CAAC;gBACD,SAAS,EAAE,CAAC,iCAAiC,CAAC;aAC/C,EAAD,EAAA;;;;IAEA,SAAA,EAAA,CAAA,EAAA,IAAA,EAAG,KAAK,EAAR,EAAA;IACA,QAAA,EAAA,CAAA,EAAA,IAAA,EAAG,KAAK,EAAR,EAAA;;;;;"
+}

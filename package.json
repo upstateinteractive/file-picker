@@ -1,0 +1,36 @@
+{
+  "name": "@upstate/filepicker",
+  "version": "0.1.2",
+  "description": "Anugular FileStack Filepicker",
+  "main": "public_api.ts",
+  "scripts": {
+    "build": "ng-packagr -p package.json"
+  },
+  "keywords": [
+    "Angular",
+    "FileStack",
+    "Upstate",
+    "Interactive"
+  ],
+  "author": "Peter B Smith",
+  "license": "MIT",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    }
+  },
+  "peerDependencies": {
+    "filestack-js": "^0.11.2",
+    "@angular/common": "^5.2.6",
+    "@angular/core": "^5.2.6",
+    "@angular/forms": "^5.2.6",
+    "@angular/material": "^5.2.3"
+  },
+  "dependencies": {
+    "@angular/core": "^5.2.6",
+    "@angular/forms": "^5.2.6",
+    "@angular/material": "^5.2.3",
+    "filestack-js": "^0.11.2",
+    "typescript": "^2.7.2"
+  }
+}
